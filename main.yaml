@@ -1,0 +1,35 @@
+name: Build and Push Docker Image
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Compile Java
+        run: javac SampleJavaApp.java
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ aryangedam }}
+          password: ${{ aryan#12345 }}
+
+      - name: Build Image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/sample-java-app:latest .
+
+      - name: Push Image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/sample-java-app:latestl
