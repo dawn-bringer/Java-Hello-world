@@ -2,8 +2,8 @@ FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY SampleJavaApp.java .
+COPY HelloWorld.java .
 
-RUN javac SampleJavaApp.java
+RUN javac HelloWorld.java
 
 CMD ["java", "SampleJavaApp"]
